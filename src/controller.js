@@ -124,6 +124,7 @@ function initController() {
                 }
 
                 if (op) {
+                    value = value[clause];
                     count++;
                     if (count === 1) {
                         qb = qb.where(key, op, value);
