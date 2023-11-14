@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Saggaf <saggaf.arsyad@gmail.com>",
-  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/nbs-nodejs/sql-web-api"
+  },
+  "license": "Apache-2.0",
   "dependencies": {
     "knex": "^3.0.1",
     "koa": "^2.14.2",
