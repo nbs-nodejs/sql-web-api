@@ -4,7 +4,8 @@
   "description": "RESTful API Wrapper to SQL database servers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:image": "docker build -t nbsdev/sql-web-api -f deployments/Dockerfile ."
   },
   "author": "Saggaf <saggaf.arsyad@gmail.com>",
   "repository": {
