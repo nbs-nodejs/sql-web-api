@@ -1,5 +1,4 @@
 const Router = require("koa-router");
-const ApiError = require("./api-error");
 const camelCase = require('lodash.camelcase');
 const db = require("./db");
 const logger = require("./logger");
@@ -255,6 +254,17 @@ function initController() {
         await db(tableName).where("id", id).del();
 
         ctx.status = 200
+    })
+
+    // Update by ID
+    controller.put("/v1/:tableName/:id", async (ctx, _) => {
+        const {tableName, id} = ctx.params;
+        const data = ctx.request.body;
+
+        const result = await db(tableName).where("id", id).update(data);
+
+        ctx.status = 200;
+        ctx.data = data;
     })
 
     return controller;
