@@ -1,0 +1,9 @@
+node_modules/
+
+*.iml
+.idea/
+
+*.sqlite
+*.db
+
+.env
