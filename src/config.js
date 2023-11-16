@@ -20,6 +20,10 @@ const config = {
         },
         postgres: {
             searchPath: process.env.DB_POSTGRES_SEARCH_PATH,
+        },
+        pool: {
+            maxActiveConn: parseInt(process.env.DB_POOL_MAX_ACTIVE_CONN || "10"),
+            minActiveConn: parseInt(process.env.DB_POOL_MIN_ACTIVE_CONN || "2"),
         }
     }
 }

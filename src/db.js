@@ -4,6 +4,10 @@ const config = require("./config");
 function initDb(db) {
     let option = {
         client: db.driver,
+        pool: {
+            max: db.pool.maxActiveConn,
+            min: db.pool.minActiveConn,
+        }
     }
 
     switch (db.driver) {
