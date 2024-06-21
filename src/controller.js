@@ -141,13 +141,45 @@ function initController() {
         if (countWhere === 0) {
             throw new ApiError("400", "Query where is required", {httpStatus: 400});
         }
-        const result = await qb.update(data);
+        let result = await qb.update(data);
+
+        // If row is updated or insert flag is not set
+        if (!result && query.insert) {
+            // Set data from exact query
+            setDataFromCondition(data, query.where);
+            logger.debug(`Setting data from where condition. Data=${JSON.stringify(data)}`)
+            // Insert data
+            result = await db(tableName).returning("id").insert(data);
+            data.id = result[0].id;
+            logger.debug(`Success insert data. id=${data.id}`)
+        } else if (!query.insert) {
+            throw new ApiError("400", "Data not found", {httpStatus: 400})
+        } else {
+            logger.debug(`Success update data.`)
+        }
 
         ctx.status = 200;
         ctx.data = data;
     })
 
     return controller;
+}
+
+function setDataFromCondition(data, conditions) {
+    for (const key in conditions) {
+        let value = conditions[key];
+
+        // Check if condition using where
+        switch (typeof value) {
+            case "string":
+            case "number":
+            case "bigint":
+            case "boolean": {
+                data[key] = value;
+                break;
+            }
+        }
+    }
 }
 
 function buildWhere(qb, conditions) {
