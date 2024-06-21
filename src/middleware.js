@@ -44,7 +44,7 @@ middlewares.rest = async (ctx, next) => {
         ctx.body = {
             success: false,
             code,
-            message: err.message,
+            message: err.message || err.code || err.toString(),
             data: null
         }
     }
