@@ -21,7 +21,7 @@ middlewares.rest = async (ctx, next) => {
         // Handle success response
         ctx.status = 200;
         ctx.body = {
-            success: false,
+            success: true,
             code: "OK",
             message: "Success",
             data: ctx.data || null
